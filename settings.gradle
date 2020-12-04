@@ -1,0 +1,5 @@
+rootProject.name = 'htm'
+include 'htm-api'
+include 'htm-commons'
+include 'htm-web-server'
+include 'htm-domain'

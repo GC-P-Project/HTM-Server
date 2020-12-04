@@ -1,0 +1,9 @@
+build
+out
+.gradle
+.idea
+*.iml
+*.log
+*.retry
+.cache
+.build
