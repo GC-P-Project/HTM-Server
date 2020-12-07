@@ -48,6 +48,50 @@ public class User {
 
     public User() {}
 
+    public long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public long getUpperTime() {
+        return upperTime;
+    }
+
+    public long getLowerTime() {
+        return lowerTime;
+    }
+
+    public long getAllTime() {
+        return allTime;
+    }
+
+    public AddressType getAddressType() {
+        return addressType;
+    }
+
     @Override
     public String toString() {
         return "User{" +
