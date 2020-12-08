@@ -35,18 +35,23 @@ public class User {
     private Gender gender;
 
     @Column(name = "upperTime")
-    private long upperTime;
+    private Long upperTime;
 
     @Column(name = "lowerTime")
-    private long lowerTime;
+    private Long lowerTime;
 
     @Column(name = "allTime")
-    private long allTime;
+    private Long allTime;
 
     @Column(name = "address_type")
     private AddressType addressType;
 
     public User() {}
+
+    public User with(String password) {
+        this.password = password;
+        return this;
+    }
 
     public long getId() {
         return id;
@@ -76,15 +81,15 @@ public class User {
         return gender;
     }
 
-    public long getUpperTime() {
+    public Long getUpperTime() {
         return upperTime;
     }
 
-    public long getLowerTime() {
+    public Long getLowerTime() {
         return lowerTime;
     }
 
-    public long getAllTime() {
+    public Long getAllTime() {
         return allTime;
     }
 
