@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gachon.htm.api.aop.Authentication;
+import com.gachon.htm.api.model.AuthorizationContext;
 import com.gachon.htm.api.model.request.TestRequest;
 import com.gachon.htm.api.model.response.TestResponse;
 import com.gachon.htm.api.service.TestService;
@@ -23,11 +25,14 @@ public class TestController {
         this.testService = Objects.requireNonNull(testService, "testService");
     }
 
+    @Authentication(doAuthentication = false)
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<TestResponse> testModel(@PathVariable("id") String id) {
-        return ResponseEntity.ok(new TestResponse());
+    public ResponseEntity testModel(AuthorizationContext authorizationContext,
+                                    @PathVariable("id") String id) {
+        return ResponseEntity.ok().build();
     }
 
+    @Authentication(doAuthentication = true)
     @RequestMapping(path = "/insert", method = RequestMethod.POST)
     public ResponseEntity<TestResponse> insertTestModel(@RequestBody TestRequest testRequest) {
         return ResponseEntity.ok(new TestResponse());
