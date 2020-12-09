@@ -4,12 +4,14 @@ import java.util.Objects;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gachon.htm.api.aop.Authentication;
+import com.gachon.htm.api.model.AuthorizationContext;
 import com.gachon.htm.api.model.request.UserSignInRequest;
 import com.gachon.htm.api.model.request.UserSignUpRequest;
 import com.gachon.htm.api.service.TokenService;
@@ -54,5 +56,13 @@ public class UserController {
             Token token = tokenService.insert(user);
             return ResponseEntity.ok(token);
         }
+    }
+
+    @Authentication(doAuthentication = true)
+    @RequestMapping(path = "/signOut", method = RequestMethod.POST)
+    public ResponseEntity signOut(@RequestAttribute("authorizationContext") AuthorizationContext authorizationContext) {
+        User user = authorizationContext.getUser();
+        tokenService.delete(user);
+        return ResponseEntity.ok().build();
     }
 }
