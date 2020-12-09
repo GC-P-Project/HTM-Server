@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +17,7 @@ import com.gachon.htm.api.model.response.TestResponse;
 import com.gachon.htm.api.service.TestService;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping(path = "/test")
 public class TestController {
 
     private final TestService testService;
@@ -25,9 +26,9 @@ public class TestController {
         this.testService = Objects.requireNonNull(testService, "testService");
     }
 
-    @Authentication(doAuthentication = false)
+    @Authentication(doAuthentication = true)
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity testModel(AuthorizationContext authorizationContext,
+    public ResponseEntity testModel(@RequestAttribute("authorizationContext") AuthorizationContext authorizationContext,
                                     @PathVariable("id") String id) {
         return ResponseEntity.ok().build();
     }

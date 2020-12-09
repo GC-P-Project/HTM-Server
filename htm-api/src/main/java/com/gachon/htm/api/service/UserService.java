@@ -18,4 +18,18 @@ public class UserService {
         Optional<User> user = userRepository.findById(userId);
         return user.orElse(null);
     }
+
+    public User find(String email, String password) {
+        Optional<User> user = userRepository.findByEmailAndPassword(email, password);
+        return user.orElse(null);
+    }
+
+    public boolean insert(User user) {
+        try {
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

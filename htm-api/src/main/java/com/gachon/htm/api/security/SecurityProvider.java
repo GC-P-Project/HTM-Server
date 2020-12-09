@@ -30,7 +30,9 @@ public class SecurityProvider {
         if (authentication.doAuthentication()) {
             Object[] methodArguments = joinPoint.getArgs();
             AuthorizationContext authorizationContext = (AuthorizationContext) methodArguments[0];
+            System.out.println(authorizationContext);
             Token token = tokenService.find(authorizationContext.getToken());
+            System.out.println(token);
             if (token == null) {
                 return false;
             } else {

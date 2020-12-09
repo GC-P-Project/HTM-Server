@@ -19,6 +19,9 @@ public class Token {
     @Column(name = "user_id")
     private long userId;
 
+    public Token() {
+    }
+
     @JsonCreator
     public Token(@JsonProperty("token") String token,
                  @JsonProperty("userId") long userId) {

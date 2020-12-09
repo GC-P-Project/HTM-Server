@@ -1,14 +1,16 @@
 package com.gachon.htm.api.service;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.gachon.htm.domain.model.Token;
 import com.gachon.htm.domain.model.User;
 import com.gachon.htm.domain.repository.token.TokenRepository;
+import com.gachon.htm.utils.HashUtils;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
 
@@ -26,10 +28,16 @@ public class TokenService {
         return optToken.orElse(null);
     }
 
+    @Transactional
+    public void delete(User user) {
+        tokenRepository.deleteByUserId(user.getId());
+    }
+
     public Token insert(User user) {
         long timeStamp = System.currentTimeMillis();
-        String token = String.valueOf(hashFunction.hashString(StringUtils.join(timeStamp, user.getId(), user.getEmail()),
-                                                              StandardCharsets.UTF_8));
-        return new Token(token, user.getId());
+        String token = HashUtils.hashEncode(StringUtils.join(timeStamp, user.getId(), user.getEmail()));
+        Token insertToken = new Token(token, user.getId());
+        tokenRepository.save(insertToken);
+        return insertToken;
     }
 }
