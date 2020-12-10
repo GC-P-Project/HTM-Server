@@ -1,5 +1,6 @@
 package com.gachon.htm.api.configuration;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -31,4 +32,7 @@ public class ApplicationConfiguration {
     public SecurityAspect securityAspect(SecurityProvider securityProvider) {
         return new SecurityAspect(securityProvider);
     }
+
+    @Bean
+    public ModelMapper modelMapper() { return new ModelMapper(); }
 }

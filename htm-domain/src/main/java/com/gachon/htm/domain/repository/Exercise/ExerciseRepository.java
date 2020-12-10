@@ -1,4 +1,4 @@
-package com.gachon.htm.domain.repository.test;
+package com.gachon.htm.domain.repository.Exercise;
 
 import com.gachon.htm.domain.model.Exercise;
 import com.gachon.htm.domain.model.ExerciseKind;
