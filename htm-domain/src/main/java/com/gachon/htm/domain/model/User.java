@@ -31,6 +31,9 @@ public class User {
     @Column(name = "height")
     private int height;
 
+    @Column(name = "weight")
+    private int weight;
+
     @Column(name = "gender")
     private Gender gender;
 
@@ -77,6 +80,10 @@ public class User {
         return height;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
     public Gender getGender() {
         return gender;
     }
@@ -106,6 +113,7 @@ public class User {
                ", age=" + age +
                ", name='" + name + '\'' +
                ", height=" + height +
+               ", weight=" + weight +
                ", gender=" + gender +
                ", upperTime=" + upperTime +
                ", lowerTime=" + lowerTime +
