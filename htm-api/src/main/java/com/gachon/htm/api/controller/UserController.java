@@ -14,6 +14,7 @@ import com.gachon.htm.api.aop.Authentication;
 import com.gachon.htm.api.model.AuthorizationContext;
 import com.gachon.htm.api.model.request.UserSignInRequest;
 import com.gachon.htm.api.model.request.UserSignUpRequest;
+import com.gachon.htm.api.model.response.UserSignInResponse;
 import com.gachon.htm.api.service.TokenService;
 import com.gachon.htm.api.service.UserService;
 import com.gachon.htm.domain.model.Token;
@@ -54,7 +55,7 @@ public class UserController {
         } else {
             tokenService.delete(user);
             Token token = tokenService.insert(user);
-            return ResponseEntity.ok(token);
+            return ResponseEntity.ok(new UserSignInResponse(token, user));
         }
     }
 
@@ -64,5 +65,11 @@ public class UserController {
         User user = authorizationContext.getUser();
         tokenService.delete(user);
         return ResponseEntity.ok().build();
+    }
+
+    @Authentication(doAuthentication = true)
+    @RequestMapping(path = "/info", method = RequestMethod.GET)
+    public ResponseEntity userInfo(@RequestAttribute("authorizationContext") AuthorizationContext authorizationContext) {
+        return ResponseEntity.ok(authorizationContext.getUser());
     }
 }
