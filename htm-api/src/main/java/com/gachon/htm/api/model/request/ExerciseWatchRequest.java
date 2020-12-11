@@ -28,13 +28,4 @@ public class ExerciseWatchRequest {
     public void setKindId(long kindId) {
         this.kindId = kindId;
     }
-
-    @Override
-    public String toString() {
-        return "ExerciseWatchRequest{" +
-                "id=" + id +
-                ", time=" + time +
-                ", kindId=" + kindId +
-                '}';
-    }
 }
