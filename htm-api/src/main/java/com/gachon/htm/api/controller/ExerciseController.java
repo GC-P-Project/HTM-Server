@@ -1,16 +1,17 @@
 package com.gachon.htm.api.controller;
 
+import com.gachon.htm.api.aop.Authentication;
+import com.gachon.htm.api.model.AuthorizationContext;
+import com.gachon.htm.api.model.request.ExerciseWatchRequest;
 import com.gachon.htm.api.model.response.ExerciseListResponse;
 import com.gachon.htm.api.model.response.ExerciseVideoResponse;
 import com.gachon.htm.api.service.ExerciseKindService;
 import com.gachon.htm.api.service.ExerciseService;
+import com.gachon.htm.api.service.UserService;
 import com.gachon.htm.domain.model.ExerciseKind;
-import org.modelmapper.ModelMapper;
+import com.gachon.htm.domain.model.User;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,13 +21,13 @@ public class ExerciseController {
 
     private final ExerciseService exerciseService;
     private final ExerciseKindService exerciseKindService;
-    private final ModelMapper modelMapper;
+    private final UserService userService;
 
 
-    public ExerciseController(ExerciseService exerciseRepository1, ExerciseKindService exerciseKindService, ModelMapper modelMapper) {
+    public ExerciseController(ExerciseService exerciseRepository1, ExerciseKindService exerciseKindService, UserService userService) {
         this.exerciseService = exerciseRepository1;
         this.exerciseKindService = exerciseKindService;
-        this.modelMapper = modelMapper;
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/list/{kind}", method = RequestMethod.GET)
@@ -50,6 +51,15 @@ public class ExerciseController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(exercise);
+    }
+
+    @Authentication(doAuthentication = true)
+    @RequestMapping(value = "/watch", method = RequestMethod.POST)
+    public ResponseEntity watch(@RequestAttribute("authorizationContext") AuthorizationContext authorizationContext, @RequestBody ExerciseWatchRequest request) {
+        User user = authorizationContext.getUser();
+        if (!userService.watchVideo(user, request)) {
+            return ResponseEntity.badRequest().build();
+        } else return ResponseEntity.ok().build();
     }
 
 }
