@@ -29,22 +29,22 @@ public class User {
     private String name;
 
     @Column(name = "height")
-    private int height;
+    private int height =0;
 
     @Column(name = "weight")
-    private int weight;
+    private int weight = 0;
 
     @Column(name = "gender")
     private Gender gender;
 
     @Column(name = "upperTime")
-    private Long upperTime;
+    private long upperTime = 0;
 
     @Column(name = "lowerTime")
-    private Long lowerTime;
+    private long lowerTime = 0;
 
     @Column(name = "allTime")
-    private Long allTime;
+    private long allTime = 0;
 
     @Column(name = "address_type")
     private AddressType addressType;
