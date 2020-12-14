@@ -4,7 +4,7 @@ import com.gachon.htm.api.model.response.ExerciseListResponse;
 import com.gachon.htm.api.model.response.ExerciseVideoResponse;
 import com.gachon.htm.domain.model.Exercise;
 import com.gachon.htm.domain.model.ExerciseKind;
-import com.gachon.htm.domain.repository.Exercise.ExerciseRepository;
+import com.gachon.htm.domain.repository.exercise.ExerciseRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
