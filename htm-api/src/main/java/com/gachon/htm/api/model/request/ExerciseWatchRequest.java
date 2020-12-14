@@ -4,6 +4,7 @@ public class ExerciseWatchRequest {
     private long id;
     private int time;
     private long kindId;
+    private int score;
 
     public long getId() {
         return id;
@@ -29,12 +30,21 @@ public class ExerciseWatchRequest {
         this.kindId = kindId;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     @Override
     public String toString() {
         return "ExerciseWatchRequest{" +
                 "id=" + id +
                 ", time=" + time +
                 ", kindId=" + kindId +
+                ", score=" + score +
                 '}';
     }
 }
