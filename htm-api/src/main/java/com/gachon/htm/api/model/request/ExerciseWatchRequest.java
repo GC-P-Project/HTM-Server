@@ -37,4 +37,14 @@ public class ExerciseWatchRequest {
     public void setScore(int score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return "ExerciseWatchRequest{" +
+                "id=" + id +
+                ", time=" + time +
+                ", kindId=" + kindId +
+                ", score=" + score +
+                '}';
+    }
 }
