@@ -1,6 +1,7 @@
 package com.gachon.htm.domain.model;
 
 import lombok.*;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 
