@@ -1,5 +1,7 @@
 package com.gachon.htm.domain.model;
 
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,12 +39,15 @@ public class User {
     @Column(name = "gender")
     private Gender gender;
 
+    @Setter
     @Column(name = "upperTime")
     private long upperTime = 0;
 
+    @Setter
     @Column(name = "lowerTime")
     private long lowerTime = 0;
 
+    @Setter
     @Column(name = "allTime")
     private long allTime = 0;
 
