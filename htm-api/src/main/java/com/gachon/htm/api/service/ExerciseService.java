@@ -27,9 +27,7 @@ public class ExerciseService {
     public List<ExerciseListResponse> findVideo(List<ExerciseKind> list) {
         List<ExerciseListResponse> responses = new ArrayList<>();
         Type type = new TypeToken<List<ExerciseListResponse>>(){}.getType();
-        list.forEach(l -> {
-            responses.addAll(modelMapper.map(exerciseRepository.findByKind(l), type));
-        });
+        responses = modelMapper.map(exerciseRepository.findByKindGreaterThanEqualAndKindLessThanEqualOrderByTime(list.get(0), list.get(list.size() - 1)), type);
         return responses;
     }
 

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ExerciseKindRepository extends JpaRepository<ExerciseKind, Long> {
-    List<ExerciseKind> findByKindContains(String kind);
+    List<ExerciseKind> findByKindContainsOrderById(String kind);
 }
