@@ -9,4 +9,6 @@ import java.util.List;
 public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 
     List<Exercise> findByKind(ExerciseKind kind);
+    List<Exercise> findByKindGreaterThanEqualAndKindLessThanEqualOrderByTime(ExerciseKind kind1, ExerciseKind kind2);
+
 }

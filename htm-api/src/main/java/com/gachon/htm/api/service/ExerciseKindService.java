@@ -15,6 +15,6 @@ public class ExerciseKindService {
         this.exerciseKindRepository = exerciseKindRepository;
     }
 
-    public List<ExerciseKind> find(String kind) { return exerciseKindRepository.findByKindContains(kind); }
+    public List<ExerciseKind> find(String kind) { return exerciseKindRepository.findByKindContainsOrderById(kind); }
 
 }
