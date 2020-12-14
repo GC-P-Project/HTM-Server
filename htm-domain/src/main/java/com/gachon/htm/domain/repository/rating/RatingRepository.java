@@ -1,4 +1,4 @@
-package com.gachon.htm.domain.repository.star;
+package com.gachon.htm.domain.repository.rating;
 
 import com.gachon.htm.domain.model.Exercise;
 import com.gachon.htm.domain.model.Rating;
