@@ -31,22 +31,25 @@ public class User {
     private String name;
 
     @Column(name = "height")
-    private int height;
+    private int height =0;
+
+    @Column(name = "weight")
+    private int weight = 0;
 
     @Column(name = "gender")
     private Gender gender;
 
     @Setter
     @Column(name = "upperTime")
-    private Long upperTime;
+    private long upperTime = 0;
 
     @Setter
     @Column(name = "lowerTime")
-    private Long lowerTime;
+    private long lowerTime = 0;
 
     @Setter
     @Column(name = "allTime")
-    private Long allTime;
+    private long allTime = 0;
 
     @Column(name = "address_type")
     private AddressType addressType;
@@ -82,6 +85,10 @@ public class User {
         return height;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
     public Gender getGender() {
         return gender;
     }
@@ -111,6 +118,7 @@ public class User {
                ", age=" + age +
                ", name='" + name + '\'' +
                ", height=" + height +
+               ", weight=" + weight +
                ", gender=" + gender +
                ", upperTime=" + upperTime +
                ", lowerTime=" + lowerTime +
