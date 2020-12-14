@@ -7,7 +7,9 @@ import com.gachon.htm.api.model.response.ExerciseListResponse;
 import com.gachon.htm.api.model.response.ExerciseVideoResponse;
 import com.gachon.htm.api.service.ExerciseKindService;
 import com.gachon.htm.api.service.ExerciseService;
+import com.gachon.htm.api.service.RatingService;
 import com.gachon.htm.api.service.UserService;
+import com.gachon.htm.domain.model.Exercise;
 import com.gachon.htm.domain.model.ExerciseKind;
 import com.gachon.htm.domain.model.User;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +24,14 @@ public class ExerciseController {
     private final ExerciseService exerciseService;
     private final ExerciseKindService exerciseKindService;
     private final UserService userService;
+    private final RatingService ratingService;
 
 
-    public ExerciseController(ExerciseService exerciseRepository1, ExerciseKindService exerciseKindService, UserService userService) {
+    public ExerciseController(ExerciseService exerciseRepository1, ExerciseKindService exerciseKindService, UserService userService, RatingService ratingService) {
         this.exerciseService = exerciseRepository1;
         this.exerciseKindService = exerciseKindService;
         this.userService = userService;
+        this.ratingService = ratingService;
     }
 
     @RequestMapping(value = "/list/{kind}", method = RequestMethod.GET)
@@ -37,7 +41,7 @@ public class ExerciseController {
             return ResponseEntity.badRequest().build();
         }
 
-        List<ExerciseListResponse> responses = exerciseService.find(byKindContains);
+        List<ExerciseListResponse> responses = exerciseService.findVideo(byKindContains);
         if (responses.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
@@ -46,7 +50,7 @@ public class ExerciseController {
 
     @RequestMapping(value = "/video/{id}", method = RequestMethod.GET)
     public ResponseEntity video(@PathVariable long id) {
-        ExerciseVideoResponse exercise = exerciseService.find(id);
+        ExerciseVideoResponse exercise = exerciseService.findVideo(id);
         if (exercise == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -59,7 +63,12 @@ public class ExerciseController {
         User user = authorizationContext.getUser();
         if (!userService.watchVideo(user, request)) {
             return ResponseEntity.badRequest().build();
-        } else return ResponseEntity.ok().build();
+        }
+        Exercise exercise = exerciseService.find(request.getId());
+        if (!ratingService.rating(user, exercise, request.getScore())) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().build();
     }
 
 }

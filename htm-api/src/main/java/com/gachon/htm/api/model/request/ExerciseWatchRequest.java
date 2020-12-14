@@ -4,6 +4,7 @@ public class ExerciseWatchRequest {
     private long id;
     private int time;
     private long kindId;
+    private int score;
 
     public long getId() {
         return id;
@@ -27,5 +28,13 @@ public class ExerciseWatchRequest {
 
     public void setKindId(long kindId) {
         this.kindId = kindId;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
